@@ -1,0 +1,46 @@
+JOBSHIELD AI — COMPLETE BEGINNER SETUP
+======================================
+
+WHAT YOU NEED
+- A Windows laptop
+- Python 3.10 or newer installed (tick Add Python to PATH during installation)
+- Visual Studio Code
+- Dataset: fake_job_postings.csv (the same CSV used in your Google Colab project)
+
+STEP 1: Unzip this project to your Desktop.
+STEP 2: Open VS Code > File > Open Folder > select jobshield_ai.
+STEP 3: Copy fake_job_postings.csv into the jobshield_ai folder.
+        IMPORTANT: The uploaded PDF contains code, not the actual CSV dataset.
+STEP 4: In VS Code click Terminal > New Terminal.
+STEP 5: Run each command below in the terminal, one at a time:
+
+Windows PowerShell:
+  py -m venv .venv
+  .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+  .\.venv\Scripts\python.exe train_model.py
+  .\.venv\Scripts\python.exe -m streamlit run app.py
+
+If 'py' is not recognized, try 'python' instead of 'py' in step 5.
+
+STEP 6: Your browser should open the app. Otherwise open http://localhost:8501
+STEP 7: Enter a job title + description and click Analyze Job Posting.
+
+NEXT TIME YOU USE IT
+  Open the folder in VS Code > Terminal > New Terminal, then run:
+  .\.venv\Scripts\python.exe -m streamlit run app.py
+
+PROJECT FILES
+app.py                  Website interface and prediction display
+train_model.py          Recreates your original preprocessing and LR training
+requirements.txt        Python packages
+fake_job_postings.csv   YOUR dataset (add it yourself)
+job_model.joblib        Created automatically after training
+tfidf_vectorizer.joblib Created automatically after training
+
+NOTES
+- The same training configuration as your PDF is used: 80/20 stratified split,
+  TF-IDF max_features=5000, ngram_range=(1,2), English stopwords,
+  balanced LogisticRegression max_iter=1000, random_state=42.
+- Results after retraining may be slightly different if your CSV/data changes.
+- This version uses the Logistic Regression model chosen for better fraud recall.
+- This is an educational classifier. Do not treat predictions as proof of fraud.
